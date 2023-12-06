@@ -6,6 +6,7 @@ import com.mycompany.tpintegrador.controllers.Controller;
 import com.mycompany.tpintegrador.models.Incidente;
 import com.mycompany.tpintegrador.models.Tecnico;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,13 +76,23 @@ public class TpIntegrador {
                 System.out.println("***********************************************");
             break;
             case "2": 
-                ArrayList<Incidente> listaInc = control.listaIncidente();
-                System.out.println("*******");
-                System.out.println("Lista de Incidentes");
-                for (Incidente incidente : listaInc) {
+                
+                    List<Object[]> incidentes4 = consultas.listarIncidentesPorDificultad();
 
-                    System.out.println("Incidentes: " + incidente.toString());
-                    incidente.agregarColchonDeHoras(4);
+                
+                for (Object[] incidente : incidentes4) {
+                    Integer idIncidente = (Integer) incidente[0];
+                    String dificultad = (String) incidente[1];
+                    LocalDateTime fechaIncidente = (LocalDateTime) incidente[2];
+                    int colchonHorasExtras= 6;
+                    int tiempo_estimado_resolucion= fechaIncidente.getHour()+ colchonHorasExtras;
+
+                    
+                    System.out.println("-ID Incidente: " + idIncidente);
+                    System.out.println(" Fecha Incidente: " + fechaIncidente);
+                    System.out.println(" Se agregaron "+ colchonHorasExtras+ " hs para que puedas resolver tu incidente");
+                    System.out.println(" Horario estimado de resolución: " + tiempo_estimado_resolucion+ "hs del día de la fecha");
+                    System.out.println("*************************************************************");
                 }
                 break;
             case "3":

@@ -2,7 +2,10 @@
 package com.mycompany.tpintegrador.models;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -162,13 +165,4 @@ public class Incidente implements Serializable {
         return "Incidente{" + "id_incidente=" + id_incidente + ", descripcion=" + descripcion + ", fecha_incidente=" + fecha_incidente + ", fecha_finalizacion=" + fecha_finalizacion + ", estado=" + estado + ", tipo=" + tipo + ", dificultad=" + dificultad + ", consideraciones=" + consideraciones + ", cliente=" + cliente + ", servicio=" + servicio + ", tecnico=" + tecnico + '}';
     }
     
-    public void agregarColchonDeHoras(int colchonHoras) {
-
-        if (dificultad.equals("complejo")) {
-            System.out.println("Fechas estimada de resolucion estimada: " + fecha_incidente.plusHours(6+ colchonHoras));
-
-           // System.out.println("Fechas estimada de resolucion despues: " + fecha_incidente.plusHours(10));
-        }
-
-    }
 }

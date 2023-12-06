@@ -141,5 +141,24 @@ public class Consultas {
 
     }
     
-    
+    public List<Object[]> listarIncidentesPorDificultad() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    List<Object[]> incidentes = new ArrayList<>();
+
+    try {
+        String consulta = "SELECT i.id_incidente, i.dificultad, i.fecha_incidente FROM Incidente i WHERE i.dificultad = 'complejo' ORDER BY i.id_incidente";
+
+        TypedQuery<Object[]> query = entityManager.createQuery(consulta, Object[].class);
+        incidentes = query.getResultList();
+    } catch (Exception ex) {
+        System.out.println("Error al generar el reporte por técnico: " + ex.getMessage());
+    } finally {
+        entityManager.close();
+    }
+    System.out.println("*************************************************************");
+    System.out.println("Se reportaron " + incidentes.size() + " incidentes con dificultad 'complejo': ");
+    System.out.println("--------------------------------------------------------");
+    return incidentes;
+}
+  
 }
