@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class Consultas {
@@ -161,4 +162,21 @@ public class Consultas {
     return incidentes;
 }
   
+    public boolean tablaIncidentesVacia() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        try {
+            // Consulta SQL para contar el número de registros en la tabla de incidentes
+            Query query = entityManager.createQuery("SELECT COUNT(i) FROM Incidente i");
+            Long count = (Long) query.getSingleResult();
+
+            // Si el recuento es cero, la tabla está vacía
+            return count == 0;
+        } catch (Exception ex) {
+            System.out.println("Error al verificar la tabla de incidentes: " + ex.getMessage());
+            return false; // Manejo de errores: considera si debes lanzar una excepción en lugar de retornar un valor booleano
+        } finally {
+            entityManager.close();
+        }
+    }
 }

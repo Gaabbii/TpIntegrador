@@ -19,6 +19,15 @@ public class TpIntegrador {
     public static void main(String[] args) {
         
         Controller control = new Controller();
+        
+        Consultas consultas6 = new Consultas();
+                
+        // Verificar si la tabla de incidentes está vacía
+        if (consultas6.tablaIncidentesVacia()) {
+            System.out.println("La tabla de incidentes está vacía. Cargando la base de datos...");
+            // Llama al método para cargar la base de datos
+            control.cargarBaseDatos();
+        }else{
     
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         System.out.println("\n*************************************************************************");
@@ -184,7 +193,7 @@ public class TpIntegrador {
 
         System.out.println("---PROGRAMA FINALIZADO---");
 
-    
+        }
     }
 }
     
